@@ -37,6 +37,26 @@
             border-bottom: 1px solid rgba(0, 255, 136, 0.1);
         }
 
+        /* Logo Box from IMG_0141 */
+        .logo-box {
+            width: 42px;
+            height: 42px;
+            border: 1px solid rgba(0, 255, 136, 0.5);
+            border-radius: 10px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 15px rgba(0, 255, 136, 0.2);
+            background: #000;
+        }
+
+        .logo-box img {
+            width: 85%;
+            height: 85%;
+            object-fit: contain;
+        }
+
         .premium-card {
             background: var(--glass-bg);
             backdrop-filter: blur(15px);
@@ -67,6 +87,26 @@
             transform: translateY(-2px);
         }
 
+        /* Telegram Button Design from IMG_0139 */
+        .btn-telegram-large {
+            background-color: #5ce6a1; /* Light Emerald from screenshot */
+            color: #000;
+            width: 100%;
+            padding: 1.25rem;
+            border-radius: 12px 12px 0 0; /* Match the rounded top in screenshot */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            font-weight: 900;
+            font-size: 1.1rem;
+            transition: filter 0.3s;
+        }
+
+        .btn-telegram-large:hover {
+            filter: brightness(1.05);
+        }
+
         .reveal {
             opacity: 0;
             transform: translateY(30px);
@@ -82,6 +122,22 @@
             background: rgba(0, 0, 0, 0.95);
             backdrop-filter: blur(15px);
         }
+        
+        /* Fixed Scroll Issue for Modal */
+        .modal-content-scroll {
+            max-height: 80vh;
+            overflow-y: auto;
+            scrollbar-width: thin;
+            scrollbar-color: rgba(0, 255, 136, 0.2) transparent;
+        }
+        
+        .modal-content-scroll::-webkit-scrollbar {
+            width: 4px;
+        }
+        .modal-content-scroll::-webkit-scrollbar-thumb {
+            background: rgba(0, 255, 136, 0.2);
+            border-radius: 10px;
+        }
     </style>
 </head>
 <body>
@@ -92,9 +148,9 @@
 
     <!-- Navigation -->
     <nav class="fixed w-full z-[100] py-6 px-6 md:px-20 flex justify-between items-center nav-blur">
-        <div class="flex items-center gap-3">
-            <div class="w-10 h-10 bg-emerald-500/20 rounded-full flex items-center justify-center border border-emerald-500/30">
-                <i class="fas fa-bolt text-emerald-400"></i>
+        <div class="flex items-center gap-4">
+            <div class="logo-box">
+                <img src="https://files.fm/f/xvfrfhz5t8" alt="HyperOutline Logo">
             </div>
             <span class="text-2xl font-black italic tracking-tighter uppercase">HyperOutline<span class="text-emerald-500">.</span></span>
         </div>
@@ -155,7 +211,7 @@
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch">
-                <!-- Unlimited Elite (8,000 MMK) - First -->
+                <!-- Unlimited Elite (8,000 MMK) -->
                 <div class="reveal premium-card p-14 border-emerald-500/30 bg-emerald-500/[0.03] shadow-[0_0_100px_rgba(0,255,136,0.1)] relative z-10 scale-105 flex flex-col">
                     <div class="absolute -top-5 left-1/2 -translate-x-1/2 bg-emerald-500 text-black text-[10px] font-black px-6 py-2 rounded-full uppercase tracking-widest">Most Popular</div>
                     <div class="mb-10">
@@ -170,7 +226,7 @@
                     <button onclick="buy('Unlimited Elite (1 Month Plan)', '8,000')" class="w-full py-6 btn-premium rounded-2xl text-xs uppercase tracking-[0.3em]">Buy Now</button>
                 </div>
 
-                <!-- Advanced Pack (6,000 MMK) - Second -->
+                <!-- Advanced Pack (6,000 MMK) -->
                 <div class="reveal premium-card p-12 flex flex-col">
                     <div class="mb-10">
                         <span class="text-zinc-600 text-[10px] font-black uppercase tracking-[0.4em]">Advanced Pack</span>
@@ -184,7 +240,7 @@
                     <button onclick="buy('Advanced Pack (1 Month Plan)', '6,000')" class="w-full py-6 btn-premium rounded-2xl text-xs uppercase tracking-[0.3em]">Buy Now</button>
                 </div>
 
-                <!-- Starter Pack (4,000 MMK) - Third -->
+                <!-- Starter Pack (4,000 MMK) -->
                 <div class="reveal premium-card p-12 flex flex-col">
                     <div class="mb-10">
                         <span class="text-zinc-600 text-[10px] font-black uppercase tracking-[0.4em]">Starter Pack</span>
@@ -232,8 +288,11 @@
     <!-- Footer -->
     <footer class="py-32 border-t border-white/5 bg-black/40">
         <div class="max-w-7xl mx-auto px-6 flex flex-col items-center">
-            <div class="flex items-center gap-3 mb-16 uppercase">
-                <span class="text-3xl font-black italic tracking-tighter">HyperOutline<span class="text-emerald-500">.</span></span>
+            <div class="flex items-center gap-4 mb-16">
+                <div class="logo-box">
+                    <img src="https://files.fm/f/xvfrfhz5t8" alt="Footer Logo">
+                </div>
+                <span class="text-3xl font-black italic tracking-tighter uppercase">HyperOutline<span class="text-emerald-500">.</span></span>
             </div>
             <div class="flex gap-16 mb-16 text-zinc-600">
                 <a href="https://t.me/HyperOutline" target="_blank" class="hover:text-emerald-400 transition-all transform hover:scale-125"><i class="fab fa-telegram-plane text-4xl"></i></a>
@@ -245,36 +304,44 @@
 
     <!-- Payment Modal -->
     <div id="paymentModal" class="modal-overlay hidden fixed inset-0 z-[1000] items-center justify-center px-4" onclick="handleBackdropClick(event)">
-        <div class="bg-zinc-950 border border-emerald-500/20 p-8 md:p-10 rounded-[40px] w-full max-w-lg relative shadow-[0_0_100px_rgba(0,0,0,1)]" onclick="event.stopPropagation()">
-            <button onclick="closeModal()" class="absolute top-6 right-6 w-10 h-10 flex items-center justify-center rounded-full bg-white/5 text-zinc-400 hover:text-white hover:bg-white/10 transition-all z-[1001]">
-                <i class="fas fa-times text-xl"></i>
-            </button>
-            <h3 class="text-3xl font-black mb-2 italic uppercase">SECURE <span class="text-emerald-400">CHECKOUT</span></h3>
-            <p id="planLabel" class="text-[10px] font-black text-emerald-500/60 uppercase tracking-[0.4em] mb-10">Plan: Unlimited Elite</p>
-            <div class="bg-emerald-500/5 p-8 rounded-3xl border border-emerald-500/10 mb-10">
-                <div class="flex justify-between items-center">
-                    <span class="text-zinc-500 font-bold text-xs uppercase tracking-widest">စုစုပေါင်း ကျသင့်ငွေ</span>
-                    <span id="priceLabel" class="text-3xl font-black text-white">8,000 MMK</span>
+        <div class="bg-zinc-950 border border-emerald-500/20 rounded-[40px] w-full max-w-lg relative shadow-[0_0_100px_rgba(0,0,0,1)] overflow-hidden flex flex-col" onclick="event.stopPropagation()">
+            <!-- Scrollable Content Wrapper -->
+            <div class="modal-content-scroll p-8 md:p-10 flex-grow">
+                <button onclick="closeModal()" class="absolute top-6 right-6 w-10 h-10 flex items-center justify-center rounded-full bg-white/5 text-zinc-400 hover:text-white hover:bg-white/10 transition-all z-[1001]">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
+                <h3 class="text-3xl font-black mb-2 italic uppercase">SECURE <span class="text-emerald-400">CHECKOUT</span></h3>
+                <p id="planLabel" class="text-[10px] font-black text-emerald-500/60 uppercase tracking-[0.4em] mb-10">Plan: Unlimited Elite</p>
+                
+                <div class="bg-emerald-500/5 p-8 rounded-3xl border border-emerald-500/10 mb-10">
+                    <div class="flex justify-between items-center">
+                        <span class="text-zinc-500 font-bold text-xs uppercase tracking-widest">စုစုပေါင်း ကျသင့်ငွေ</span>
+                        <span id="priceLabel" class="text-3xl font-black text-white">8,000 MMK</span>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 gap-4 mb-12 text-left">
+                    <div class="p-6 rounded-3xl bg-zinc-900/50 border border-white/5 flex justify-between items-center">
+                        <div>
+                            <span class="text-[9px] text-zinc-600 block font-black uppercase tracking-widest mb-1">K-Pay (Daw Mi Sar)</span>
+                            <span class="text-base font-mono font-bold text-white tracking-widest">09978061401</span>
+                        </div>
+                        <button onclick="copyToClipboard('09978061401')" class="p-3 bg-white/5 rounded-xl hover:bg-emerald-500/20 transition"><i class="fas fa-copy text-zinc-500"></i></button>
+                    </div>
+                    <div class="p-6 rounded-3xl bg-zinc-900/50 border border-white/5 flex justify-between items-center">
+                        <div>
+                            <span class="text-[9px] text-zinc-600 block font-black uppercase tracking-widest mb-1">Wave Money (Daw Mi Sar)</span>
+                            <span class="text-base font-mono font-bold text-white tracking-widest">09978061401</span>
+                        </div>
+                        <button onclick="copyToClipboard('09978061401')" class="p-3 bg-white/5 rounded-xl hover:bg-emerald-500/20 transition"><i class="fas fa-copy text-zinc-500"></i></button>
+                    </div>
                 </div>
             </div>
-            <div class="grid grid-cols-1 gap-4 mb-12 text-left">
-                <div class="p-6 rounded-3xl bg-zinc-900/50 border border-white/5 flex justify-between items-center">
-                    <div>
-                        <span class="text-[9px] text-zinc-600 block font-black uppercase tracking-widest mb-1">K-Pay (Daw me sar)</span>
-                        <span class="text-base font-mono font-bold text-white tracking-widest">09978061401</span>
-                    </div>
-                    <button onclick="copyToClipboard('09978061401')" class="p-3 bg-white/5 rounded-xl hover:bg-emerald-500/20 transition"><i class="fas fa-copy text-zinc-500"></i></button>
-                </div>
-                <div class="p-6 rounded-3xl bg-zinc-900/50 border border-white/5 flex justify-between items-center">
-                    <div>
-                        <span class="text-[9px] text-zinc-600 block font-black uppercase tracking-widest mb-1">Wave Money (Mi Sar)</span>
-                        <span class="text-base font-mono font-bold text-white tracking-widest">09978061401</span>
-                    </div>
-                    <button onclick="copyToClipboard('09978061401')" class="p-3 bg-white/5 rounded-xl hover:bg-emerald-500/20 transition"><i class="fas fa-copy text-zinc-500"></i></button>
-                </div>
-            </div>
-            <a href="https://t.me/HyperOutline" target="_blank" class="w-full py-6 btn-premium rounded-2xl flex items-center justify-center gap-4 text-xs uppercase tracking-[0.3em]">
-                <i class="fas fa-paper-plane"></i> Telegram သို့ ငွေလွှဲပြေစာပို့ပေးရန်
+
+            <!-- Telegram Button Fixed to bottom from IMG_0139 -->
+            <a href="https://t.me/HyperOutline" target="_blank" class="btn-telegram-large uppercase tracking-tighter flex-shrink-0">
+                <i class="fab fa-telegram-plane text-xl"></i>
+                TELEGRAM သို့ ငွေလွှဲပြေစာ ပို့ပေးရန်
             </a>
         </div>
     </div>
@@ -348,6 +415,8 @@
             modal.classList.remove('hidden');
             modal.classList.add('flex');
             document.body.style.overflow = 'hidden';
+            // Scroll to top of modal content
+            document.querySelector('.modal-content-scroll').scrollTop = 0;
         }
 
         function closeModal() {
