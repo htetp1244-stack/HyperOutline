@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="my">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HyperOutline VPN - Premium Edition</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Pyidaungsu:wght@400;700&display=swap');
+        
+        :root {
+            --pure-black: #020403;
+            --emerald-bright: #00ff88;
+            --emerald-deep: #004d33;
+            --glass-bg: rgba(10, 15, 12, 0.7);
+        }
+
+        body {
+            font-family: 'Pyidaungsu', 'Inter', sans-serif;
+            background-color: var(--pure-black);
+            color: #ffffff;
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+
+        #canvas-container {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1;
+            background: radial-gradient(circle at center, #0a1f16 0%, var(--pure-black) 100%);
+        }
+
+        .nav-blur {
+            backdrop-filter: blur(20px);
+            background: rgba(0, 0, 0, 0.8);
+            border-bottom: 1px solid rgba(0, 255, 136, 0.1);
+        }
+
+        .premium-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            border-radius: 32px;
+            transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .premium-card:hover {
+            transform: translateY(-12px);
+            border-color: rgba(0, 255, 136, 0.4);
+            box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.5), 0 18px 36px -18px rgba(0, 255, 136, 0.2);
+        }
+
+        .text-glow {
+            text-shadow: 0 0 20px rgba(0, 255, 136, 0.5);
+        }
+
+        .btn-premium {
+            background: linear-gradient(135deg, var(--emerald-bright), #00cc6e);
+            color: #000;
+            font-weight: 800;
+            transition: all 0.4s ease;
+        }
+
+        .btn-premium:hover {
+            box-shadow: 0 15px 30px -5px rgba(0, 255, 136, 0.6);
+            transform: translateY(-2px);
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .modal-overlay {
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(15px);
+        }
+    </style>
+</head>
+<body>
+
+    <div id="canvas-container">
+        <canvas id="hero-canvas"></canvas>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-[100] py-6 px-6 md:px-20 flex justify-between items-center nav-blur">
+        <div class="flex items-center gap-3">
+            <div class="w-10 h-10 bg-emerald-500/20 rounded-full flex items-center justify-center border border-emerald-500/30">
+                <i class="fas fa-bolt text-emerald-400"></i>
+            </div>
+            <span class="text-2xl font-black italic tracking-tighter uppercase">HyperOutline<span class="text-emerald-500">.</span></span>
+        </div>
+        <div class="hidden md:flex gap-10 text-[10px] font-black uppercase tracking-[0.4em] text-zinc-500">
+            <a href="#features" class="hover:text-emerald-400 transition">ဝန်ဆောင်မှုများ</a>
+            <a href="#packages" class="hover:text-emerald-400 transition">ဈေးနှုန်းများ</a>
+            <a href="#how-to" class="hover:text-emerald-400 transition">အသုံးပြုပုံ</a>
+        </div>
+        <a href="https://t.me/HyperOutline" target="_blank" class="px-6 py-2 bg-emerald-500/10 border border-emerald-500/30 rounded-full text-[10px] font-black text-emerald-400 hover:bg-emerald-400 hover:text-black transition uppercase tracking-widest">Support</a>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative min-h-screen flex flex-col items-center justify-center px-6 text-center pt-20">
+        <div class="reveal mb-8 inline-flex items-center gap-3 px-6 py-2 rounded-full bg-emerald-500/5 border border-emerald-500/20">
+            <span class="text-emerald-400 text-[10px] font-black uppercase tracking-[0.4em]">Next Gen Stealth VPN</span>
+        </div>
+        
+        <h1 class="reveal text-6xl md:text-9xl font-black mb-10 leading-[0.85] tracking-tighter uppercase">
+            ELEVATE YOUR <br> <span class="text-emerald-400 text-glow">NETWORK</span>
+        </h1>
+        
+        <p class="reveal text-zinc-400 text-base md:text-xl max-w-2xl mb-16 leading-relaxed font-medium">
+            မြန်မာနိုင်ငံ၏ အမြန်ဆုံးနှင့် အလုံခြုံဆုံး Private Nodes များကို အသုံးပြု၍ <br class="hidden md:block"> အင်တာနက်ကို အကန့်အသတ်မရှိ လွတ်လပ်စွာ အသုံးပြုလိုက်ပါ။
+        </p>
+        
+        <div class="reveal flex flex-col md:flex-row gap-6">
+            <button onclick="document.getElementById('packages').scrollIntoView()" class="btn-premium px-16 py-5 rounded-2xl text-xs uppercase tracking-[0.3em]">Buy Now</button>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-40 px-6 max-w-7xl mx-auto">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+            <div class="reveal premium-card p-12 text-center md:text-left">
+                <i class="fas fa-rocket text-4xl text-emerald-400 mb-8"></i>
+                <h3 class="text-2xl font-black mb-4 italic">10Gbps Speed</h3>
+                <p class="text-zinc-500 leading-relaxed text-sm">Fiber လိုင်းများကဲ့သို့ မြန်ဆန်သော Bandwidth ကို အသုံးပြုထားသောကြောင့် 4K Streaming နှင့် Gaming အတွက် အထူးသင့်လျော်ပါသည်။</p>
+            </div>
+            <div class="reveal premium-card p-12 border-emerald-500/20 text-center md:text-left">
+                <i class="fas fa-gamepad text-4xl text-emerald-400 mb-8"></i>
+                <h3 class="text-2xl font-black mb-4 italic">Ultra Low Ping</h3>
+                <p class="text-zinc-500 leading-relaxed text-sm">Mobile Legends, PUBG နှင့် Wild Rift ဆော့သူများအတွက် Ping တည်ငြိမ်ပြီး အဆင်ပြေစေမည့် Nodes များကို သီးသန့်ပေးထားပါသည်။</p>
+            </div>
+            <div class="reveal premium-card p-12 text-center md:text-left">
+                <i class="fas fa-shield-virus text-4xl text-emerald-400 mb-8"></i>
+                <h3 class="text-2xl font-black mb-4 italic">Shadow Access</h3>
+                <p class="text-zinc-500 leading-relaxed text-sm">Stealth Technology ကို အသုံးပြုထားသောကြောင့် ISP များမှ ပိတ်ဆို့ထားသော Website များကို လုံခြုံစွာ ကျော်ဖြတ်နိုင်ပါသည်။</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="packages" class="py-40 px-6 relative">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-24">
+                <h2 class="text-5xl md:text-7xl font-black mb-6 italic tracking-tighter uppercase">ELITE <span class="text-emerald-400">PLANS</span></h2>
+                <div class="h-1 w-24 bg-emerald-500 mx-auto rounded-full"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch">
+                <!-- Unlimited Elite (8,000 MMK) - First -->
+                <div class="reveal premium-card p-14 border-emerald-500/30 bg-emerald-500/[0.03] shadow-[0_0_100px_rgba(0,255,136,0.1)] relative z-10 scale-105 flex flex-col">
+                    <div class="absolute -top-5 left-1/2 -translate-x-1/2 bg-emerald-500 text-black text-[10px] font-black px-6 py-2 rounded-full uppercase tracking-widest">Most Popular</div>
+                    <div class="mb-10">
+                        <span class="text-emerald-400 text-[10px] font-black uppercase tracking-[0.4em]">Unlimited Elite</span>
+                        <div class="text-6xl font-black mt-4 tracking-tighter text-white">8,000 <span class="text-sm font-bold text-emerald-900 uppercase">MMK</span></div>
+                    </div>
+                    <ul class="space-y-6 mb-12 flex-grow">
+                        <li class="flex items-center gap-4 text-base text-white font-bold"><i class="fas fa-bolt text-emerald-400"></i> No Data Limit</li>
+                        <li class="flex items-center gap-4 text-base text-white font-bold"><i class="fas fa-bolt text-emerald-400"></i> 1 Month Plan</li>
+                        <li class="flex items-center gap-4 text-base text-white font-bold"><i class="fas fa-bolt text-emerald-400"></i> Lowest Gaming Ping</li>
+                    </ul>
+                    <button onclick="buy('Unlimited Elite (1 Month Plan)', '8,000')" class="w-full py-6 btn-premium rounded-2xl text-xs uppercase tracking-[0.3em]">Buy Now</button>
+                </div>
+
+                <!-- Advanced Pack (6,000 MMK) - Second -->
+                <div class="reveal premium-card p-12 flex flex-col">
+                    <div class="mb-10">
+                        <span class="text-zinc-600 text-[10px] font-black uppercase tracking-[0.4em]">Advanced Pack</span>
+                        <div class="text-5xl font-black mt-4 tracking-tighter">6,000 <span class="text-sm font-bold text-zinc-700 uppercase">MMK</span></div>
+                    </div>
+                    <ul class="space-y-6 mb-12 flex-grow">
+                        <li class="flex items-center gap-4 text-sm text-zinc-400"><i class="fas fa-check-circle text-emerald-500/40"></i> 200 GB Data</li>
+                        <li class="flex items-center gap-4 text-sm text-zinc-400"><i class="fas fa-check-circle text-emerald-500/40"></i> 1 Month Plan</li>
+                        <li class="flex items-center gap-4 text-sm text-zinc-400"><i class="fas fa-check-circle text-emerald-500/40"></i> High Speed Servers</li>
+                    </ul>
+                    <button onclick="buy('Advanced Pack (1 Month Plan)', '6,000')" class="w-full py-6 btn-premium rounded-2xl text-xs uppercase tracking-[0.3em]">Buy Now</button>
+                </div>
+
+                <!-- Starter Pack (4,000 MMK) - Third -->
+                <div class="reveal premium-card p-12 flex flex-col">
+                    <div class="mb-10">
+                        <span class="text-zinc-600 text-[10px] font-black uppercase tracking-[0.4em]">Starter Pack</span>
+                        <div class="text-5xl font-black mt-4 tracking-tighter">4,000 <span class="text-sm font-bold text-zinc-700 uppercase">MMK</span></div>
+                    </div>
+                    <ul class="space-y-6 mb-12 flex-grow">
+                        <li class="flex items-center gap-4 text-sm text-zinc-400"><i class="fas fa-check-circle text-emerald-500/40"></i> 100 GB Data</li>
+                        <li class="flex items-center gap-4 text-sm text-zinc-400"><i class="fas fa-check-circle text-emerald-500/40"></i> 1 Month Plan</li>
+                        <li class="flex items-center gap-4 text-sm text-zinc-400"><i class="fas fa-check-circle text-emerald-500/40"></i> Secure Browsing</li>
+                    </ul>
+                    <button onclick="buy('Starter Pack (1 Month Plan)', '4,000')" class="w-full py-6 btn-premium rounded-2xl text-xs uppercase tracking-[0.3em]">Buy Now</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How to Setup Section -->
+    <section id="how-to" class="py-40 px-6 max-w-5xl mx-auto">
+        <h2 class="text-3xl font-black mb-20 italic text-center uppercase tracking-widest">အသုံးပြုပုံ <span class="text-emerald-400">လမ်းညွှန်</span></h2>
+        <div class="space-y-12">
+            <div class="reveal flex gap-8 items-start">
+                <div class="w-12 h-12 rounded-full bg-emerald-500 text-black flex items-center justify-center font-black flex-shrink-0">1</div>
+                <div>
+                    <h4 class="text-xl font-bold mb-2">Outline App ကို Install လုပ်ပါ</h4>
+                    <p class="text-zinc-500 text-sm">App Store သို့မဟုတ် Play Store မှ "Outline App" ကို ရှာဖွေပြီး Download ပြုလုပ်ပါ။</p>
+                </div>
+            </div>
+            <div class="reveal flex gap-8 items-start">
+                <div class="w-12 h-12 rounded-full bg-emerald-500 text-black flex items-center justify-center font-black flex-shrink-0">2</div>
+                <div>
+                    <h4 class="text-xl font-bold mb-2">Access Key ကို Copy ယူပါ</h4>
+                    <p class="text-zinc-500 text-sm">HyperOutline မှ ပေးပို့ထားသော "ssconf://" ဖြင့် စတင်သည့် Key ကို အပြည့်အစုံ Copy ကူးပါ။</p>
+                </div>
+            </div>
+            <div class="reveal flex gap-8 items-start">
+                <div class="w-12 h-12 rounded-full bg-emerald-500 text-black flex items-center justify-center font-black flex-shrink-0">3</div>
+                <div>
+                    <h4 class="text-xl font-bold mb-2">Connect ပြုလုပ်ပြီး စတင်သုံးစွဲပါ</h4>
+                    <p class="text-zinc-500 text-sm">App အတွင်းရှိ "+" ကိုနှိပ်၍ Key ကို Paste လုပ်ပါ။ ထို့နောက် Connect ကိုနှိပ်ပြီး လွတ်လပ်စွာ အသုံးပြုနိုင်ပါပြီ။</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-32 border-t border-white/5 bg-black/40">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col items-center">
+            <div class="flex items-center gap-3 mb-16 uppercase">
+                <span class="text-3xl font-black italic tracking-tighter">HyperOutline<span class="text-emerald-500">.</span></span>
+            </div>
+            <div class="flex gap-16 mb-16 text-zinc-600">
+                <a href="https://t.me/HyperOutline" target="_blank" class="hover:text-emerald-400 transition-all transform hover:scale-125"><i class="fab fa-telegram-plane text-4xl"></i></a>
+                <a href="https://t.me/HyperOutline" target="_blank" class="hover:text-emerald-400 transition-all transform hover:scale-125"><i class="fas fa-headset text-4xl"></i></a>
+            </div>
+            <p class="text-[10px] text-zinc-700 font-black uppercase tracking-[0.8em] text-center mb-4">© 2024 HYPEROUTLINE NETWORK</p>
+        </div>
+    </footer>
+
+    <!-- Payment Modal -->
+    <div id="paymentModal" class="modal-overlay hidden fixed inset-0 z-[1000] items-center justify-center px-4" onclick="handleBackdropClick(event)">
+        <div class="bg-zinc-950 border border-emerald-500/20 p-8 md:p-10 rounded-[40px] w-full max-w-lg relative shadow-[0_0_100px_rgba(0,0,0,1)]" onclick="event.stopPropagation()">
+            <button onclick="closeModal()" class="absolute top-6 right-6 w-10 h-10 flex items-center justify-center rounded-full bg-white/5 text-zinc-400 hover:text-white hover:bg-white/10 transition-all z-[1001]">
+                <i class="fas fa-times text-xl"></i>
+            </button>
+            <h3 class="text-3xl font-black mb-2 italic uppercase">SECURE <span class="text-emerald-400">CHECKOUT</span></h3>
+            <p id="planLabel" class="text-[10px] font-black text-emerald-500/60 uppercase tracking-[0.4em] mb-10">Plan: Unlimited Elite</p>
+            <div class="bg-emerald-500/5 p-8 rounded-3xl border border-emerald-500/10 mb-10">
+                <div class="flex justify-between items-center">
+                    <span class="text-zinc-500 font-bold text-xs uppercase tracking-widest">စုစုပေါင်း ကျသင့်ငွေ</span>
+                    <span id="priceLabel" class="text-3xl font-black text-white">8,000 MMK</span>
+                </div>
+            </div>
+            <div class="grid grid-cols-1 gap-4 mb-12 text-left">
+                <div class="p-6 rounded-3xl bg-zinc-900/50 border border-white/5 flex justify-between items-center">
+                    <div>
+                        <span class="text-[9px] text-zinc-600 block font-black uppercase tracking-widest mb-1">K-Pay (Daw me sar)</span>
+                        <span class="text-base font-mono font-bold text-white tracking-widest">09978061401</span>
+                    </div>
+                    <button onclick="copyToClipboard('09978061401')" class="p-3 bg-white/5 rounded-xl hover:bg-emerald-500/20 transition"><i class="fas fa-copy text-zinc-500"></i></button>
+                </div>
+                <div class="p-6 rounded-3xl bg-zinc-900/50 border border-white/5 flex justify-between items-center">
+                    <div>
+                        <span class="text-[9px] text-zinc-600 block font-black uppercase tracking-widest mb-1">Wave Money (Mi Sar)</span>
+                        <span class="text-base font-mono font-bold text-white tracking-widest">09978061401</span>
+                    </div>
+                    <button onclick="copyToClipboard('09978061401')" class="p-3 bg-white/5 rounded-xl hover:bg-emerald-500/20 transition"><i class="fas fa-copy text-zinc-500"></i></button>
+                </div>
+            </div>
+            <a href="https://t.me/HyperOutline" target="_blank" class="w-full py-6 btn-premium rounded-2xl flex items-center justify-center gap-4 text-xs uppercase tracking-[0.3em]">
+                <i class="fas fa-paper-plane"></i> Telegram သို့ ငွေလွှဲပြေစာပို့ပေးရန်
+            </a>
+        </div>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('hero-canvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+        let mouse = { x: null, y: null };
+
+        window.addEventListener('mousemove', (e) => { mouse.x = e.x; mouse.y = e.y; });
+
+        function init() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            particles = [];
+            const particleCount = (canvas.width * canvas.height) / 15000;
+            for (let i = 0; i < particleCount; i++) { particles.push(new Particle()); }
+        }
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 1.5 + 0.5;
+                this.vx = (Math.random() - 0.5) * 0.5;
+                this.vy = (Math.random() - 0.5) * 0.5;
+            }
+            draw() {
+                ctx.fillStyle = 'rgba(0, 255, 136, 0.4)';
+                ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.fill();
+            }
+            update() {
+                this.x += this.vx; this.y += this.vy;
+                if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
+                if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
+                let dx = mouse.x - this.x; let dy = mouse.y - this.y;
+                let distance = Math.sqrt(dx * dx + dy * dy);
+                if (distance < 150) {
+                    this.x -= dx * 0.01; this.y -= dy * 0.01;
+                }
+            }
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            for (let i = 0; i < particles.length; i++) {
+                particles[i].update(); particles[i].draw();
+                for (let j = i; j < particles.length; j++) {
+                    const dx = particles[i].x - particles[j].x;
+                    const dy = particles[i].y - particles[j].y;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+                    if (dist < 120) {
+                        ctx.strokeStyle = `rgba(0, 255, 136, ${0.1 * (1 - dist/120)})`;
+                        ctx.lineWidth = 0.5; ctx.beginPath();
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y); ctx.stroke();
+                    }
+                }
+            }
+            requestAnimationFrame(animate);
+        }
+
+        window.addEventListener('resize', init);
+        init(); animate();
+
+        function buy(plan, price) {
+            document.getElementById('planLabel').innerText = "Plan: " + plan;
+            document.getElementById('priceLabel').innerText = price + " MMK";
+            const modal = document.getElementById('paymentModal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('paymentModal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+            document.body.style.overflow = 'auto';
+        }
+
+        function handleBackdropClick(event) {
+            if (event.target.id === 'paymentModal') closeModal();
+        }
+
+        function copyToClipboard(text) {
+            const el = document.createElement('textarea');
+            el.value = text; document.body.appendChild(el);
+            el.select(); document.execCommand('copy');
+            document.body.removeChild(el);
+            const btn = event.currentTarget;
+            const originalIcon = btn.innerHTML;
+            btn.innerHTML = '<i class="fas fa-check text-emerald-400"></i>';
+            setTimeout(() => { btn.innerHTML = originalIcon; }, 2000);
+        }
+
+        window.addEventListener('scroll', () => {
+            document.querySelectorAll('.reveal').forEach(r => {
+                if (r.getBoundingClientRect().top < window.innerHeight - 100) r.classList.add('active');
+            });
+        });
+        window.dispatchEvent(new Event('scroll'));
+    </script>
+</body>
+</html>
